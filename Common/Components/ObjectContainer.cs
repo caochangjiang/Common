@@ -2,16 +2,27 @@
 
 namespace Common.Components
 {
+    /// <summary>
+    /// Dependency injection container
+    /// </summary>
     public class ObjectContainer
     {
         private static IObjectRegister _objectRegister;
         private static IObjectResolver _objectResolver;
 
+        /// <summary>
+        /// Set register
+        /// </summary>
+        /// <param name="objectRegister">the class which implemete IObjectRegister</param>
         public static void SetRegister(IObjectRegister objectRegister)
         {
             _objectRegister = objectRegister;
         }
 
+        /// <summary>
+        /// Get the Resolver
+        /// </summary>
+        /// <returns>IObjectResolver</returns>
         public static IObjectResolver GetResolver()
         {
             _objectResolver = _objectRegister.GetObjectResolver();
@@ -93,16 +104,29 @@ namespace Common.Components
             return _objectResolver.ResolveOptional(serviceType);
         }
 
+        /// <summary>
+        /// Resolve a service or null with the servcieName
+        /// </summary>
+        /// <typeparam name="TService"></typeparam>
+        /// <param name="serviceName">The serviceName</param>
+        /// <returns></returns>
         public static TService ResolveNamed<TService>(string serviceName) where TService : class
         {
             return _objectResolver.ResolveNamed<TService>(serviceName);
         }
 
+        /// <summary>
+        /// Resolve a service by serviceName and serviceType
+        /// </summary>
+        /// <param name="serviceName">the serivce name</param>
+        /// <param name="serviceType">the service type</param>
+        /// <returns></returns>
         public static object ResolveNamed(string serviceName, Type serviceType)
         {
             return _objectResolver.ResolveNamed(serviceName, serviceType);
         }
     }
+
     /// <summary>An enum to description the lifetime of a component.
     /// </summary>
     public enum LifeStyle

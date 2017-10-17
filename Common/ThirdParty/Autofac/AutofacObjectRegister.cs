@@ -6,7 +6,7 @@ namespace Common.ThirdParty.Autofac
 {
     public class AutofacObjectRegister : IObjectRegister
     {
-        public ContainerBuilder _containerBuilder;
+        private ContainerBuilder _containerBuilder;
         public IObjectResolver GetObjectResolver()
         {
             return new AutofacObjectResolver(_containerBuilder);

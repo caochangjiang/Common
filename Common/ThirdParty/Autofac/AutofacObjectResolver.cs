@@ -7,16 +7,14 @@ namespace Common.ThirdParty.Autofac
     public class AutofacObjectResolver : IObjectResolver
     {
         private IContainer Container { get; set; }
+
         public ContainerBuilder ContainerBuilder { get; private set; }
+
         public AutofacObjectResolver(ContainerBuilder objectContainer)
         {
             ContainerBuilder = objectContainer;
         }
-        public IContainer BuildContainer()
-        {
-            Container = ContainerBuilder.Build();
-            return Container;
-        }
+       
         public TService Resolve<TService>() where TService : class
         {
             return Container.Resolve<TService>();
